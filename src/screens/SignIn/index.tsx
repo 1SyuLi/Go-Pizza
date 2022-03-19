@@ -1,23 +1,45 @@
 import React from 'react';
 import { KeyboardAvoidingView, Platform } from 'react-native';
+
+
+
 import { Inputs } from '../../components/Inputs';
 import { Button } from '../../components/Button';
 
 
+import brandImg from '../../assets/brand.png';
+
 import {
     Container,
-    Content
+    Content,
+    Title,
+    Brand,
+    ForgotPasswordButton,
+    ForgotPasswordLabel
 } from './styles';
 
-export function SignIn(){
+export function SignIn() {
 
-    return(
+    return (
         <Container>
             <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-                <Inputs placeholder='E-mail' type='secondary' autoCorrect={false} autoCapitalize='none'/>
-                <Inputs placeholder='Senha' type='secondary' secureTextEntry/>
+                <Content>
 
-                <Button type='secondary' isLoading={false} title='Enviar'/>
+                    <Brand source={brandImg} />
+
+                    <Title>Login</Title>
+
+                    <Inputs placeholder='E-mail' type='secondary' autoCorrect={false} autoCapitalize='none' />
+                    <Inputs placeholder='Senha' type='secondary' secureTextEntry />
+
+                    <ForgotPasswordButton>
+                        <ForgotPasswordLabel>
+                            Esqueci minha senha
+                        </ForgotPasswordLabel>
+                    </ForgotPasswordButton>
+
+                    <Button type='secondary' isLoading={false} title='Enviar' />
+                </Content>
             </KeyboardAvoidingView>
         </Container>
     )
