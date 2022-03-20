@@ -10,6 +10,7 @@ import {
     DeleteLabel,
 } from './styles';
 import { BackButton } from '../../components/BackButton';
+import { Photo } from '../../components/Photo';
 
 export function Products() {
     return (
@@ -25,6 +26,8 @@ export function Products() {
                     <DeleteLabel>Deletar</DeleteLabel>
                 </TouchableOpacity>
             </Header>
+
+            <Photo uri="" />
 
 
         </Container>
