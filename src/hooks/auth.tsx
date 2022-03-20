@@ -21,6 +21,7 @@ type AuthContextData = {
     isLogging: boolean,
     user: UserProps | null,
     signOut: () => Promise<void>,
+    forgotPassword: (email: string) => Promise<void>
 }
 
 
@@ -96,6 +97,17 @@ function AuthProvider({ children }: AuthProviderProps) {
         setUser(null);
     }
 
+    async function forgotPassword(email: string) {
+        if (!email) {
+            return Alert.alert('Redefinir senha', 'Informe o email')
+        }
+
+        auth().sendPasswordResetEmail(email)
+            .then(() => Alert.alert('Redefinir senha', 'Enviamos um link no seu e-mail para redefinir sua senha'))
+            .catch(() => Alert.alert('Redefinir senha', 'Não foi possivel enviar o e-mail para redefinir a senha'))
+
+    }
+
     useEffect(() => {
         loadUserStorageData();
     }, [])
@@ -107,6 +119,7 @@ function AuthProvider({ children }: AuthProviderProps) {
             isLogging,
             signIn,
             signOut,
+            forgotPassword,
         }}>
             {children}
         </AuthContext.Provider>
