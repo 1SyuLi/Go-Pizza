@@ -1,17 +1,26 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 
-import { Platform } from 'react-native';
+import { Platform, TouchableOpacity } from 'react-native';
 
 import {
-    Container
+    Container,
+    Header,
+    Title,
+    DeleteLabel,
 } from './styles';
 
 export function Products() {
     return (
         <Container behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-            <StatusBar translucent style='dark' />
+            <StatusBar translucent style='light' />
+            <Header>
+                <Title>Cadastrar</Title>
 
+                <TouchableOpacity>
+                    <DeleteLabel>Deletar</DeleteLabel>
+                </TouchableOpacity>
+            </Header>
 
 
         </Container>
