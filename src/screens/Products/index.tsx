@@ -9,12 +9,16 @@ import {
     Title,
     DeleteLabel,
 } from './styles';
+import { BackButton } from '../../components/BackButton';
 
 export function Products() {
     return (
         <Container behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
             <StatusBar translucent style='light' />
             <Header>
+
+                <BackButton />
+
                 <Title>Cadastrar</Title>
 
                 <TouchableOpacity>
