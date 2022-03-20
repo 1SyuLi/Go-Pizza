@@ -8,7 +8,10 @@ import {
     Header,
     Title,
     DeleteLabel,
+    Upload,
+    PickImageButton
 } from './styles';
+
 import { BackButton } from '../../components/BackButton';
 import { Photo } from '../../components/Photo';
 
@@ -27,7 +30,11 @@ export function Products() {
                 </TouchableOpacity>
             </Header>
 
-            <Photo uri="" />
+
+            <Upload>
+                <Photo uri="" />
+                <PickImageButton title='Carregar' />
+            </Upload>
 
 
         </Container>

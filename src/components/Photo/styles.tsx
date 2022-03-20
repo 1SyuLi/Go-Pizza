@@ -1,5 +1,7 @@
 import { RFValue } from 'react-native-responsive-fontsize';
-import styled, { css } from 'styled-components/native'
+import styled, { css } from 'styled-components/native';
+
+import { Button } from '../Button';
 
 export const Image = styled.Image`
     width: 160px;
@@ -24,6 +26,9 @@ export const PlaceholderTitle = styled.Text`
 
     ${({ theme }) => css`
         font-family: ${theme.FONTS.TEXT};
-        color: ${theme.COLORS.SECONDARY_900}
+        color: ${theme.COLORS.SECONDARY_900};
     `}
 `;
+
+
+
