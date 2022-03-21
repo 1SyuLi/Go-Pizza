@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 
 import { Platform, TouchableOpacity } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
 
 import {
     Container,
@@ -15,7 +16,27 @@ import {
 import { BackButton } from '../../components/BackButton';
 import { Photo } from '../../components/Photo';
 
-export function Products() {
+export function Product() {
+
+    const [image, setImage] = useState('');
+
+    async function handleImagePicker() {
+
+        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+        if (status === 'granted') {
+            const result: any = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                aspect: [4, 4],
+            });
+
+
+            if (!result.cancelled) {
+                setImage(result.uri);
+            }
+        }
+    }
+
     return (
         <Container behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
             <StatusBar translucent style='light' />
@@ -32,8 +53,8 @@ export function Products() {
 
 
             <Upload>
-                <Photo uri="" />
-                <PickImageButton title='Carregar' />
+                <Photo uri={image} />
+                <PickImageButton title='Carregar' onPress={handleImagePicker} />
             </Upload>
 
 
