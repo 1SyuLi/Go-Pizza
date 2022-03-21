@@ -3,7 +3,7 @@ import { KeyboardAvoidingView, Platform } from 'react-native';
 
 import { useAuth } from '../../hooks/auth';
 
-import { Inputs } from '../../components/Inputs';
+import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 
 import brandImg from '../../assets/brand.png';
@@ -41,10 +41,10 @@ export function SignIn() {
 
                     <Title>Login</Title>
 
-                    <Inputs placeholder='E-mail' type='secondary' autoCorrect={false} autoCapitalize='none'
+                    <Input placeholder='E-mail' type='secondary' autoCorrect={false} autoCapitalize='none'
                         onChangeText={setEmail}
                     />
-                    <Inputs placeholder='Senha' type='secondary' secureTextEntry
+                    <Input placeholder='Senha' type='secondary' secureTextEntry
                         onChangeText={setPassword}
                     />
 
