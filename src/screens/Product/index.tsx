@@ -15,6 +15,7 @@ import {
 
 import { BackButton } from '../../components/BackButton';
 import { Photo } from '../../components/Photo';
+import { InputPrice } from '../../components/InputPrice';
 
 export function Product() {
 
@@ -57,7 +58,9 @@ export function Product() {
                 <PickImageButton title='Carregar' onPress={handleImagePicker} />
             </Upload>
 
-
+            <InputPrice size='P' />
+            <InputPrice size='M' />
+            <InputPrice size='G' />
         </Container>
     );
 }
