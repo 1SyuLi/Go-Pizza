@@ -6,6 +6,9 @@ import { useTheme } from 'styled-components';
 
 import happyEmoji from '../../assets/happy.png';
 
+import { Search } from '../../components/Search';
+
+
 import {
     Container,
     Header,
@@ -35,6 +38,8 @@ export function Home() {
                     <MaterialIcons name="logout" color={theme.COLORS.TITLE} size={24} />
                 </TouchableOpacity>
             </Header>
+
+            <Search onSearch={() => { }} onClear={() => { }} />
 
         </Container>
     );

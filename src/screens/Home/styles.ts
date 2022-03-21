@@ -41,5 +41,5 @@ export const GreetingText = styled.Text`
     ${({ theme }) => css`
         font-family: ${theme.FONTS.TITLE};
         color: ${theme.COLORS.TITLE};
-    `}
+    `};
 `;
