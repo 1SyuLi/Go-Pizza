@@ -15,6 +15,9 @@ import {
     Greeting,
     GreetingEmoji,
     GreetingText,
+    MenuHeader,
+    Title,
+    MenuItemsNumber,
 } from './styles';
 
 
@@ -41,6 +44,10 @@ export function Home() {
 
             <Search onSearch={() => { }} onClear={() => { }} />
 
+            <MenuHeader>
+                <Title>Cardápio</Title>
+                <MenuItemsNumber>10 pizzas</MenuItemsNumber>
+            </MenuHeader>
         </Container>
     );
 }
