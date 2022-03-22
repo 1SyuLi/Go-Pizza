@@ -19,6 +19,7 @@ import {
     Title,
     MenuItemsNumber,
 } from './styles';
+import { ProductCard } from '../../components/ProductCard';
 
 
 export function Home() {
@@ -48,6 +49,16 @@ export function Home() {
                 <Title>Cardápio</Title>
                 <MenuItemsNumber>10 pizzas</MenuItemsNumber>
             </MenuHeader>
+
+            <ProductCard
+                data={{
+                    id: '1',
+                    description: 'Ingredientes dessa pizza ... ...',
+                    name: 'Pizza',
+                    photo_url: 'https://github.com/1syuli.png',
+                }}
+            />
+
         </Container>
     );
 }
