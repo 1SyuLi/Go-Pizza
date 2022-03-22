@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Alert, TouchableOpacity, FlatList } from 'react-native';
+
 import { MaterialIcons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
-import { TouchableOpacity } from 'react-native';
 import { useTheme } from 'styled-components';
 
 import happyEmoji from '../../assets/happy.png';
 
 import { Search } from '../../components/Search';
+import { ProductCard, ProductProps } from '../../components/ProductCard';
+
+
+import firestore from '@react-native-firebase/firestore';
 
 
 import {
@@ -19,14 +24,48 @@ import {
     Title,
     MenuItemsNumber,
 } from './styles';
-import { ProductCard } from '../../components/ProductCard';
 
 
 export function Home() {
 
 
     const theme = useTheme();
+    const [pizzas, setPizzas] = useState<ProductProps[]>([]);
+    const [search, setSearch] = useState('');
 
+    async function fetchPizza(value: string) {
+        const formattedValue = value.toLocaleLowerCase().trim();
+
+        await firestore()
+            .collection('pizzas')
+            .orderBy('name_insensivite')
+            .startAt(formattedValue)
+            .endAt(`${formattedValue}\uf8ff`)
+            .get()
+            .then(response => {
+                const data = response.docs.map(doc => {
+                    return {
+                        id: doc.id,
+                        ...doc.data()
+                    }
+                }) as ProductProps[];
+
+                setPizzas(data);
+            }).catch(() => Alert.alert('Consulta', 'Não foi possível realizar a consulta'));
+    }
+
+    function handleSearch() {
+        fetchPizza(search)
+    }
+
+    function handleSearchClear() {
+        setSearch('');
+        fetchPizza('');
+    }
+
+    useEffect(() => {
+        fetchPizza('');
+    }, []);
 
     return (
         <Container>
@@ -43,19 +82,27 @@ export function Home() {
                 </TouchableOpacity>
             </Header>
 
-            <Search onSearch={() => { }} onClear={() => { }} />
+            <Search
+                onChangeText={setSearch}
+                value={search}
+                onSearch={handleSearch}
+                onClear={handleSearchClear}
+            />
 
             <MenuHeader>
                 <Title>Cardápio</Title>
                 <MenuItemsNumber>10 pizzas</MenuItemsNumber>
             </MenuHeader>
 
-            <ProductCard
-                data={{
-                    id: '1',
-                    description: 'Ingredientes dessa pizza ... ...',
-                    name: 'Pizza',
-                    photo_url: 'https://github.com/1syuli.png',
+            <FlatList
+                data={pizzas}
+                keyExtractor={item => item.id}
+                renderItem={({ item }) => <ProductCard data={item} />}
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={{
+                    paddingTop: 20,
+                    paddingBottom: 125,
+                    marginHorizontal: 24,
                 }}
             />
 
