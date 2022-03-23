@@ -1,6 +1,7 @@
 import styled from 'styled-components/native'
 import { LinearGradient } from 'expo-linear-gradient';
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 export const Container = styled.KeyboardAvoidingView`
    flex: 1;
@@ -11,10 +12,14 @@ export const Header = styled(LinearGradient).attrs(
         colors: theme.COLORS.GRADIENT,
     }))
 )`
-    /* width: 100%;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between; */
-
     padding: ${getStatusBarHeight() + 33}px 20px 24px;
+`;
+
+export const Photo = styled.Image`
+    width: ${RFValue(240)}px;
+    height: ${RFValue(240)}px;
+    border-radius: ${RFValue(120)}px;
+    align-self: center;
+    position: relative;
+    top: -120px;
 `;
