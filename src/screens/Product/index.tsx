@@ -122,50 +122,7 @@ export function Product() {
 
     }
 
-    async function handleUpdate(id: string) {
-        // if (!name.trim()) {
-        //     return Alert.alert('Cadastro', 'Informe o nome da pizza.');
-        // }
-
-        // if (!description.trim()) {
-        //     return Alert.alert('Cadastro', 'Informe a description da pizza.');
-        // }
-
-        // if (!image) {
-        //     return Alert.alert('Cadastro', 'Selecione a imagem da pizza.');
-        // }
-
-        // if (!priceSizeP || !priceSizeM || !priceSizeG) {
-        //     return Alert.alert('Cadastro', 'Informe o preço de todos os tamanhos da pizza.');
-        // }
-
-        // setIsLoading(true);
-
-        // const fileName = String(new Date().getTime());
-        // const reference = storage().ref(`/pizzas/${fileName}.png`);
-        // await reference.putFile(image);
-        // const photo_url = await reference.getDownloadURL();
-
-        // console.log(id);
-
-        // const userUpdate = await firestore().collection('pizzas').doc(id).get();
-        // const userData = userUpdate.data();
-        // await userData.update({
-        //     name,
-        //     name_insensivite: name.toLowerCase().trim(),
-        //     description,
-        //     prices_sizes: {
-        //         p: priceSizeP,
-        //         m: priceSizeM,
-        //         g: priceSizeG,
-        //     },
-        //     photo_url: '',
-        //     photo_path: '',
-        // }).then(() => Alert.alert('Aualização', 'Pizza atualizada')).catch(() => Alert.alert('Atualização', 'deu ruim 😯'))
-
-        // setIsLoading(false);
-        // navigation.goBack();
-    }
+    function handleUpdate() { }
 
     function handleDelete() {
         firestore()
@@ -261,7 +218,7 @@ export function Product() {
                         !id &&
                         <Button
                             title='Cadastrar Pizza'
-                            type='secondary'
+                            type='primary'
                             isLoading={ísLoading}
                             onPress={handleAdd}
                         />

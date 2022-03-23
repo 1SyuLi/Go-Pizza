@@ -15,6 +15,7 @@ import { Product } from './src/screens/Product';
 import { AuthProvider } from './src/hooks/auth';
 import { Home } from './src/screens/Home';
 import { Routes } from './src/routes';
+import { Order } from './src/screens/Order';
 
 
 
@@ -36,7 +37,7 @@ export default function App() {
       <StatusBar style='light' translucent backgroundColor='transparent' />
 
       <AuthProvider>
-        <Routes />
+        <Order />
       </AuthProvider>
     </ThemeProvider>
   );
