@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Platform, ScrollView } from 'react-native';
 
+import { StatusBar } from 'expo-status-bar';
+
 
 import { BackButton } from '../../components/BackButton';
 import { Button } from '../../components/Button';
@@ -28,6 +30,7 @@ export function Order() {
 
     return (
         <Container behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+            <StatusBar translucent style='light' />
             <ContentScroll>
                 <Header>
                     <BackButton
