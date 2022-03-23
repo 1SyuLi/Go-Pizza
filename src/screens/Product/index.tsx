@@ -117,17 +117,9 @@ export function Product() {
                 },
                 photo_url,
                 photo_path: reference.fullPath,
-            }).then(() => Alert.alert('Cadastro', 'pizza cadastrada com sucesso'))
-            .catch(() => Alert.alert('Cadastro', 'Não foi possivel cadastrar a pizza'))
+            }).then(() => navigation.navigate('home'))
+            .catch(() => setIsLoading(false));
 
-        setImage('');
-        setName('');
-        setDescription('');
-        setPriceSizeP('');
-        setPriceSizeM('');
-        setPriceSizeG('');
-
-        setIsLoading(false);
     }
 
     async function handleUpdate(id: string) {
@@ -238,13 +230,13 @@ export function Product() {
 
                     <InputGroup>
                         <Label>Nome</Label>
-                        <Input onChangeText={setName} value={name} />
+                        <Input onChangeText={setName} value={name} autoCorrect={false} />
                     </InputGroup>
 
                     <InputGroup>
                         <InputGroupHeader>
                             <Label>Descrição</Label>
-                            <MaxCharacters>0 de 60 caracteres</MaxCharacters>
+                            <MaxCharacters >0 de 60 caracteres</MaxCharacters>
                         </InputGroupHeader>
 
                         <Input
@@ -253,15 +245,16 @@ export function Product() {
                             style={{ height: 80 }}
                             onChangeText={setDescription}
                             value={description}
+                            autoCorrect={false}
                         />
                     </InputGroup>
 
                     <InputGroup>
                         <Label>Tamanhos e preços</Label>
 
-                        <InputPrice size='P' onChangeText={setPriceSizeP} value={priceSizeP} />
-                        <InputPrice size='M' onChangeText={setPriceSizeM} value={priceSizeM} />
-                        <InputPrice size='G' onChangeText={setPriceSizeG} value={priceSizeG} />
+                        <InputPrice size='P' onChangeText={setPriceSizeP} value={priceSizeP} autoCorrect={false} />
+                        <InputPrice size='M' onChangeText={setPriceSizeM} value={priceSizeM} autoCorrect={false} />
+                        <InputPrice size='G' onChangeText={setPriceSizeG} value={priceSizeG} autoCorrect={false} />
                     </InputGroup>
 
                     {

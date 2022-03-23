@@ -104,7 +104,7 @@ export function Home() {
 
             <MenuHeader>
                 <Title>Cardápio</Title>
-                <MenuItemsNumber>10 pizzas</MenuItemsNumber>
+                <MenuItemsNumber>{pizzas.length} pizzas</MenuItemsNumber>
             </MenuHeader>
 
             <FlatList
@@ -126,7 +126,7 @@ export function Home() {
 
             <NewProductButton
                 title='Cadastrar Pizza'
-                type='secondary'
+                type='primary'
                 onPress={handleAdd}
             />
 
