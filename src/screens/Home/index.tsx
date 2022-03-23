@@ -12,6 +12,7 @@ import { ProductCard, ProductProps } from '../../components/ProductCard';
 
 
 import firestore from '@react-native-firebase/firestore';
+import { useNavigation } from '@react-navigation/native';
 
 
 import {
@@ -32,6 +33,7 @@ export function Home() {
     const theme = useTheme();
     const [pizzas, setPizzas] = useState<ProductProps[]>([]);
     const [search, setSearch] = useState('');
+    const navigation = useNavigation();
 
     async function fetchPizza(value: string) {
         const formattedValue = value.toLocaleLowerCase().trim();
@@ -61,6 +63,10 @@ export function Home() {
     function handleSearchClear() {
         setSearch('');
         fetchPizza('');
+    }
+
+    function handleOPen(id: string) {
+        navigation.navigate('product', { id })
     }
 
     useEffect(() => {
@@ -97,7 +103,12 @@ export function Home() {
             <FlatList
                 data={pizzas}
                 keyExtractor={item => item.id}
-                renderItem={({ item }) => <ProductCard data={item} />}
+                renderItem={({ item }) => (
+                    <ProductCard
+                        data={item}
+                        onPress={() => handleOPen(item.id)}
+                    />
+                )}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{
                     paddingTop: 20,

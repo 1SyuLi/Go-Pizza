@@ -13,6 +13,9 @@ import { InputPrice } from '../../components/InputPrice';
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { ProductNavigationProps } from '../../@types/navigation';
+
 
 import {
     Container,
@@ -28,6 +31,7 @@ import {
     MaxCharacters
 } from './styles';
 
+
 export function Product() {
 
     const [image, setImage] = useState('');
@@ -37,6 +41,10 @@ export function Product() {
     const [priceSizeM, setPriceSizeM] = useState('');
     const [priceSizeG, setPriceSizeG] = useState('');
     const [ísLoading, setIsLoading] = useState(false);
+
+    const route = useRoute();
+    const { id } = route.params as ProductNavigationProps;
+    console.log('id do produto selecionado: ', id);
 
     async function handleImagePicker() {
 
