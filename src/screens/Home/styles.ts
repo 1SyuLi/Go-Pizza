@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 
-
 import { LinearGradient } from 'expo-linear-gradient';
-import { getStatusBarHeight } from 'react-native-iphone-x-helper';
+import { getBottomSpace, getStatusBarHeight } from 'react-native-iphone-x-helper';
+import { Button } from '../../components/Button';
 
 export const Container = styled.View`
    flex: 1;
@@ -71,4 +71,9 @@ export const Title = styled.Text`
        font-family: ${theme.FONTS.TITLE};
        color: ${theme.COLORS.SECONDARY_900};
     `};
+`;
+
+export const NewProductButton = styled(Button)`
+    margin: 0px 24px;
+    margin-bottom: ${getBottomSpace() + 12}px;
 `;
