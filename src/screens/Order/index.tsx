@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
-import { Platform, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Alert, Platform, ScrollView } from 'react-native';
 
 import { StatusBar } from 'expo-status-bar';
-
 
 import { BackButton } from '../../components/BackButton';
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
 import { RadioButton } from '../../components/RadioButton';
+import { ProductProps } from '../../components/ProductCard';
 import { PIZZAS_TYPES } from '../../utils/pizzaTypes';
+
+import firestore from '@react-native-firebase/firestore';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { OrderNavigationProps } from '../../@types/navigation';
 
 import {
     Container,
@@ -24,9 +28,37 @@ import {
     Title,
 } from './styles';
 
+
+type PizzaResponse = ProductProps & {
+    prices_sizes: {
+        [key: string]: number;
+    }
+}
+
 export function Order() {
 
     const [size, setSize] = useState('');
+    const [pizza, setPizza] = useState<PizzaResponse>({} as PizzaResponse);
+    const navigation = useNavigation();
+
+    const route = useRoute();
+    const { id } = route.params as OrderNavigationProps;
+
+    function handleBackButton() {
+        navigation.goBack();
+    }
+
+    useEffect(() => {
+        if (id) {
+            firestore()
+                .collection('pizzas')
+                .doc(id)
+                .get()
+                .then(response => setPizza(response.data() as PizzaResponse))
+                .catch(() => Alert.alert('Pedido', 'Não foi possível carregar o produto'))
+        }
+
+    }, [id])
 
     return (
         <Container behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
@@ -34,16 +66,16 @@ export function Order() {
             <ContentScroll>
                 <Header>
                     <BackButton
-                        onPress={() => { }}
+                        onPress={handleBackButton}
                         style={{ marginBottom: 108 }}
                     />
                 </Header>
 
-                <Photo source={{ uri: 'https://firebasestorage.googleapis.com/v0/b/gopizza-6c572.appspot.com/o/pizzas%2F1648043701771.png?alt=media&token=08f236be-52f9-419c-a5fa-84ee4e993914' }} />
+                <Photo source={{ uri: pizza.photo_url }} />
 
                 <Form>
 
-                    <Title>Nome da pizza</Title>
+                    <Title>{pizza.name}</Title>
                     <Label>Selecione um tamanho</Label>
 
                     <Sizes>

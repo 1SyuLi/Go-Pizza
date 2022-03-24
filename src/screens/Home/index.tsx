@@ -71,7 +71,8 @@ export function Home() {
     }
 
     function handleOPen(id: string) {
-        navigation.navigate('product', { id })
+        const route = user?.isAdmin ? 'product' : 'order';
+        navigation.navigate(route, { id })
     }
 
     function handleAdd() {
@@ -95,7 +96,7 @@ export function Home() {
             <Header>
                 <Greeting>
                     <GreetingEmoji source={happyEmoji} />
-                    <GreetingText>Olá, Admin</GreetingText>
+                    <GreetingText>Olá, {user.isAdmin ? 'Admin' : 'Garçom'}</GreetingText>
                 </Greeting>
 
                 <TouchableOpacity onPress={signOut}>
