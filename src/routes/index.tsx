@@ -1,15 +1,20 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 
+import { SignIn } from '../screens/SignIn';
+
 import { UserStackRoutes } from './user.stack.routes';
 import { UserTabRoutes } from './user.tab.routes';
+import { useAuth } from '../hooks/auth';
 
 
 export function Routes() {
 
+    const { user } = useAuth();
+
     return (
         <NavigationContainer>
-            <UserTabRoutes />
+            {user ? <UserStackRoutes /> : <SignIn />}
         </NavigationContainer>
     )
 }
