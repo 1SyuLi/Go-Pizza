@@ -30,7 +30,10 @@ yarn android
 
 <div style={{display: 'flex', flex-direction: 'row'}}>
   <img src="https://i.ibb.co/KmKfpvq/signIn.png" alt="signIn" border="0">
-  <img src="https://i.ibb.co/FBXddQ2/Admin-Home.png" alt="Admin-Home" border="0">
+</div>
+
+<div style={{display: 'flex', flex-direction: 'row'}}>
+   <img src="https://i.ibb.co/FBXddQ2/Admin-Home.png" alt="Admin-Home" border="0">
   <img src="https://i.ibb.co/82jrvHC/Create-Pizza.png" alt="Create-Pizza" border="0">
 </div>
 
