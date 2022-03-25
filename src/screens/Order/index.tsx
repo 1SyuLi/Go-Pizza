@@ -14,6 +14,8 @@ import firestore from '@react-native-firebase/firestore';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { OrderNavigationProps } from '../../@types/navigation';
 
+import { useAuth } from '../../hooks/auth';
+
 import {
     Container,
     ContentScroll,
@@ -29,6 +31,7 @@ import {
 } from './styles';
 
 
+
 type PizzaResponse = ProductProps & {
     prices_sizes: {
         [key: string]: number;
@@ -37,10 +40,13 @@ type PizzaResponse = ProductProps & {
 
 export function Order() {
 
+    const { user } = useAuth();
+
     const [size, setSize] = useState('');
     const [quantity, setQuantity] = useState(0);
     const [tableNumber, setTableNumber] = useState('');
     const [pizza, setPizza] = useState<PizzaResponse>({} as PizzaResponse);
+    const [sendingOrder, setSendingOrder] = useState(false);
 
 
     const navigation = useNavigation();
@@ -49,6 +55,36 @@ export function Order() {
     const { id } = route.params as OrderNavigationProps;
 
     const amount = size ? pizza.prices_sizes[size] * quantity : '0,00';
+
+    function handleOrder() {
+        if (!size) {
+            return Alert.alert('Pedido', 'Selecione o tamanho da pizza');
+        }
+
+        if (!tableNumber) {
+            return Alert.alert('Pedido', 'Informe o número da mesa');
+        }
+
+        setSendingOrder(true);
+
+        firestore()
+            .collection('orders')
+            .add({
+                quantity,
+                amount,
+                pizza: pizza.name,
+                size,
+                table_number: tableNumber,
+                status: 'Preparando',
+                waiter_id: user?.id,
+                image: pizza.photo_url,
+            })
+            .then(() => navigation.navigate('home'))
+            .catch(() => {
+                Alert.alert('Pedido', 'Não foi possível realizar o pedido');
+                setSendingOrder(false);
+            })
+    }
 
     function handleBackButton() {
         navigation.goBack();
@@ -109,7 +145,11 @@ export function Order() {
 
                     <Price>Valor de R$ {amount}</Price>
 
-                    <Button title='Confirmar Pedido' />
+                    <Button
+                        onPress={handleOrder}
+                        isLoading={sendingOrder}
+                        title='Confirmar Pedido'
+                    />
 
                 </Form>
             </ContentScroll>
